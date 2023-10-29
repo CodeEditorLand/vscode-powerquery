@@ -1,38 +1,37 @@
 {
   "name": "vscode-powerquery-client",
   "version": "0.0.1",
+  "private": "false",
   "description": "VS Code part of language server",
-  "author": {
-    "name": "Nikola Hristov",
-    "email": "nikola@nikolahristov.tech",
-    "url": "https://nikolahristov.tech"
-  },
-  "license": "MIT",
   "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
+  "bugs": {
+    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git",
     "directory": "client"
   },
-  "issues": {
-    "url": "https://github.com/microsoft/vscode-powerquery/issues"
+  "license": "MIT",
+  "author": {
+    "name": "Nikola Hristov",
+    "email": "nikola@nikolahristov.tech",
+    "url": "https://nikolahristov.tech"
   },
+  "publisher": "playform",
+  "type": "module",
+  "main": "lib\\extension",
   "scripts": {
-    "init": "npm install-clean",
     "build": ".\\node_modules\\.bin\\tsc",
-    "watch": ".\\node_modules\\.bin\\tsc -watch",
-    "test": "node ./lib/test/runTest.js",
+    "init": "npm install-clean",
     "link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-language-services",
     "link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
     "lint": "eslint src --ext ts",
-    "webpack-prod": "node_modules\\.bin\\webpack --mode production",
+    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts",
+    "test": "node ./lib/test/runTest.js",
+    "watch": ".\\node_modules\\.bin\\tsc -watch",
     "webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
-    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
-  },
-  "main": "lib\\extension",
-  "engines": {
-    "node": ">=16.13.2",
-    "vscode": "1.40.0"
+    "webpack-prod": "node_modules\\.bin\\webpack --mode production"
   },
   "dependencies": {
     "@microsoft/powerquery-language-services": "0.9.2",
@@ -60,16 +59,18 @@
     "ts-loader": "9.5.0",
     "ts-node": "10.9.1",
     "typescript": "5.2.2",
+    "typescript-esbuild": "0.3.1",
     "webpack": "5.89.0",
-    "webpack-cli": "5.1.4",
-    "typescript-esbuild": "0.3.1"
+    "webpack-cli": "5.1.4"
   },
-  "bugs": {
-    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
+  "engines": {
+    "node": ">=16.13.2",
+    "vscode": "1.40.0"
   },
-  "type": "module",
-  "private": "false",
   "publishConfig": {
     "access": "public"
+  },
+  "issues": {
+    "url": "https://github.com/microsoft/vscode-powerquery/issues"
   }
 }

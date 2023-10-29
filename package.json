@@ -1,82 +1,66 @@
 {
   "name": "vscode-powerquery",
-  "version": "0.0.1",
   "displayName": "Power Query / M Language",
+  "version": "0.0.1",
+  "private": "false",
   "description": "Language service for the Power Query / M formula language",
+  "categories": [
+    "Programming Languages"
+  ],
+  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
+  "bugs": {
+    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
+  },
+  "license": "MIT",
   "author": {
     "name": "Nikola Hristov",
     "email": "nikola@nikolahristov.tech",
     "url": "https://nikolahristov.tech"
   },
-  "license": "MIT",
-  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
-  },
-  "issues": {
-    "url": "https://github.com/microsoft/vscode-powerquery/issues"
-  },
+  "publisher": "playform",
+  "type": "module",
+  "main": "./client/dist/extension",
   "scripts": {
-    "postinstall": "npm run install:client && npm run install:server && npm run install:scripts",
-    "install:client": "cd client && npm install-clean",
-    "install:server": "cd server && npm install-clean",
-    "install:scripts": "cd scripts && npm install-clean",
     "audit:fix": "npm audit fix && npm run audit:fix:client && npm run audit:fix:server && npm run audit:fix:scripts",
     "audit:fix:client": "cd client && npm audit fix",
-    "audit:fix:server": "cd server && npm audit fix",
     "audit:fix:scripts": "cd scripts && npm audit fix",
+    "audit:fix:server": "cd server && npm audit fix",
     "build": "npm run build:client && npm run build:server && npm run build:scripts",
     "build:client": "cd client && npm run build",
-    "build:server": "cd server && npm run build",
     "build:scripts": "cd scripts && npm run build",
+    "build:server": "cd server && npm run build",
+    "postinstall": "npm run install:client && npm run install:server && npm run install:scripts",
+    "install:client": "cd client && npm install-clean",
+    "install:scripts": "cd scripts && npm install-clean",
+    "install:server": "cd server && npm install-clean",
     "link:start": "npm run link:start:client && npm run link:start:server && npm run link:start:scripts",
     "link:start:client": "cd client && npm run link:start",
-    "link:start:server": "cd server && npm run link:start",
     "link:start:scripts": "cd scripts && npm run link:start",
+    "link:start:server": "cd server && npm run link:start",
     "link:stop": "npm run link:stop:client && npm run link:stop:server && npm run link:stop:scripts",
     "link:stop:client": "cd client && npm run link:stop",
-    "link:stop:server": "cd server && npm run link:stop",
     "link:stop:scripts": "cd scripts && npm run link:stop",
+    "link:stop:server": "cd server && npm run link:stop",
     "lint": "npm run lint:client && npm run lint:server",
     "lint:client": "eslint client/src --ext ts",
-    "lint:server": "eslint server/src --ext ts",
     "lint:scripts": "eslint  scripts --ext ts",
+    "lint:server": "eslint server/src --ext ts",
+    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts",
     "test": "npm run test:client && npm run test:server",
     "test:client": "cd client && npm run test",
     "test:server": "cd server && npm run test",
+    "vscode:prepublish": "npm run webpack-prod",
     "webpack-dev": "npm run webpack-dev:client && npm run webpack-dev:server",
     "webpack-dev:client": "cd client && npm run webpack-dev",
     "webpack-dev:server:": "cd server && npm run webpack-dev",
     "webpack-prod": "npm run webpack-prod:server && npm run webpack-prod:client",
     "webpack-prod:client": "cd client && npm run webpack-prod",
-    "webpack-prod:server": "cd server && npm run webpack-prod",
-    "vscode:prepublish": "npm run webpack-prod",
-    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
+    "webpack-prod:server": "cd server && npm run webpack-prod"
   },
-  "icon": "imgs/PQIcon_256.png",
-  "main": "./client/dist/extension",
-  "engines": {
-    "node": ">=16.13.2",
-    "vscode": "1.40.0"
-  },
-  "capabilities": {
-    "untrustedWorkspaces": {
-      "supported": true
-    }
-  },
-  "categories": [
-    "Programming Languages"
-  ],
-  "activationEvents": [
-    "onLanguage:powerquery",
-    "onCommand:powerquery.extractDataflowDocument",
-    "onCommand:powerquery.mEscapeText",
-    "onCommand:powerquery.mUnescapeText",
-    "onCommand:powerquery.jsonEscapeText",
-    "onCommand:powerquery.jsonUnescapeText"
-  ],
-  "publisher": "PowerQuery",
   "contributes": {
     "commands": [
       {
@@ -105,30 +89,6 @@
         "category": "powerquery"
       }
     ],
-    "menus": {
-      "commandPalette": [
-        {
-          "command": "powerquery.extractDataflowDocument",
-          "when": "editorIsOpen && editorLangId == json"
-        },
-        {
-          "command": "powerquery.mEscapeText",
-          "when": "editorHasSelection"
-        },
-        {
-          "command": "powerquery.mUnescapeText",
-          "when": "editorHasSelection"
-        },
-        {
-          "command": "powerquery.jsonUnescapeText",
-          "when": "editorHasSelection"
-        },
-        {
-          "command": "powerquery.jsonEscapeText",
-          "when": "editorHasSelection"
-        }
-      ]
-    },
     "configuration": {
       "type": "object",
       "title": "Power Query",
@@ -250,6 +210,13 @@
         }
       }
     },
+    "grammars": [
+      {
+        "language": "powerquery",
+        "scopeName": "source.powerquery",
+        "path": "./syntaxes/powerquery.tmLanguage.json"
+      }
+    ],
     "languages": [
       {
         "id": "powerquery",
@@ -271,14 +238,39 @@
         "configuration": "./language-configuration.json"
       }
     ],
-    "grammars": [
-      {
-        "language": "powerquery",
-        "scopeName": "source.powerquery",
-        "path": "./syntaxes/powerquery.tmLanguage.json"
-      }
-    ]
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "powerquery.extractDataflowDocument",
+          "when": "editorIsOpen && editorLangId == json"
+        },
+        {
+          "command": "powerquery.mEscapeText",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "powerquery.mUnescapeText",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "powerquery.jsonUnescapeText",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "powerquery.jsonEscapeText",
+          "when": "editorHasSelection"
+        }
+      ]
+    }
   },
+  "activationEvents": [
+    "onLanguage:powerquery",
+    "onCommand:powerquery.extractDataflowDocument",
+    "onCommand:powerquery.mEscapeText",
+    "onCommand:powerquery.mUnescapeText",
+    "onCommand:powerquery.jsonEscapeText",
+    "onCommand:powerquery.jsonUnescapeText"
+  ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "6.9.0",
     "@typescript-eslint/parser": "6.9.0",
@@ -291,12 +283,20 @@
     "typescript": "5.2.2",
     "typescript-esbuild": "0.3.1"
   },
-  "bugs": {
-    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
+  "engines": {
+    "node": ">=16.13.2",
+    "vscode": "1.40.0"
   },
-  "type": "module",
-  "private": "false",
   "publishConfig": {
     "access": "public"
+  },
+  "icon": "imgs/PQIcon_256.png",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "issues": {
+    "url": "https://github.com/microsoft/vscode-powerquery/issues"
   }
 }
