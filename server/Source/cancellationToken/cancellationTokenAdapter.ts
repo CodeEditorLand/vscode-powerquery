@@ -5,28 +5,31 @@ import * as LS from "vscode-languageserver/node";
 import * as PQP from "@microsoft/powerquery-parser";
 
 export class CancellationTokenAdapter implements PQP.ICancellationToken {
-    private cancelReason: string | undefined;
+	private cancelReason: string | undefined;
 
-    constructor(
-        protected readonly parserCancellationToken: PQP.ICancellationToken,
-        protected readonly languageServerCancellationToken: LS.CancellationToken,
-    ) {}
+	constructor(
+		protected readonly parserCancellationToken: PQP.ICancellationToken,
+		protected readonly languageServerCancellationToken: LS.CancellationToken
+	) {}
 
-    public isCancelled(): boolean {
-        return (
-            this.parserCancellationToken.isCancelled() || this.languageServerCancellationToken.isCancellationRequested
-        );
-    }
+	public isCancelled(): boolean {
+		return (
+			this.parserCancellationToken.isCancelled() ||
+			this.languageServerCancellationToken.isCancellationRequested
+		);
+	}
 
-    public throwIfCancelled(): void {
-        if (this.isCancelled()) {
-            this.parserCancellationToken.cancel(this.cancelReason ?? "Language server cancellation requested");
-            this.parserCancellationToken.throwIfCancelled();
-        }
-    }
+	public throwIfCancelled(): void {
+		if (this.isCancelled()) {
+			this.parserCancellationToken.cancel(
+				this.cancelReason ?? "Language server cancellation requested"
+			);
+			this.parserCancellationToken.throwIfCancelled();
+		}
+	}
 
-    public cancel(reason: string): void {
-        this.cancelReason = reason;
-        this.parserCancellationToken.cancel(reason);
-    }
+	public cancel(reason: string): void {
+		this.cancelReason = reason;
+		this.parserCancellationToken.cancel(reason);
+	}
 }

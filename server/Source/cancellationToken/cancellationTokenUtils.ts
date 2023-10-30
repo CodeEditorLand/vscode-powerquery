@@ -6,16 +6,26 @@ import * as PQP from "@microsoft/powerquery-parser";
 import { CancellationTokenAdapter } from "./cancellationTokenAdapter";
 
 export function createAdapterOrTimedCancellation(
-    cancellationToken: LS.CancellationToken | undefined,
-    timeoutInMs: number,
+	cancellationToken: LS.CancellationToken | undefined,
+	timeoutInMs: number
 ): PQP.ICancellationToken {
-    return cancellationToken ? createAdapter(cancellationToken, timeoutInMs) : createTimedCancellation(timeoutInMs);
+	return cancellationToken
+		? createAdapter(cancellationToken, timeoutInMs)
+		: createTimedCancellation(timeoutInMs);
 }
 
-export function createAdapter(cancellationToken: LS.CancellationToken, timeoutInMs: number): CancellationTokenAdapter {
-    return new CancellationTokenAdapter(createTimedCancellation(timeoutInMs), cancellationToken);
+export function createAdapter(
+	cancellationToken: LS.CancellationToken,
+	timeoutInMs: number
+): CancellationTokenAdapter {
+	return new CancellationTokenAdapter(
+		createTimedCancellation(timeoutInMs),
+		cancellationToken
+	);
 }
 
-export function createTimedCancellation(timeoutInMs: number): PQP.TimedCancellationToken {
-    return new PQP.TimedCancellationToken(timeoutInMs);
+export function createTimedCancellation(
+	timeoutInMs: number
+): PQP.TimedCancellationToken {
+	return new PQP.TimedCancellationToken(timeoutInMs);
 }

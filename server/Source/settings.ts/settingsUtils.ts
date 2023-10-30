@@ -17,156 +17,180 @@ const LanguageId: string = "powerquery";
 let serverSettings: ServerSettings = DefaultServerSettings;
 let hasConfigurationCapability: boolean = false;
 
-export async function initializeServerSettings(connection: LS.Connection): Promise<void> {
-    serverSettings = await fetchConfigurationSettings(connection);
+export async function initializeServerSettings(
+	connection: LS.Connection
+): Promise<void> {
+	serverSettings = await fetchConfigurationSettings(connection);
 }
 
 export function createAnalysisSettings(
-    library: PQLS.Library.ILibrary,
-    traceManager: PQP.Trace.TraceManager,
+	library: PQLS.Library.ILibrary,
+	traceManager: PQP.Trace.TraceManager
 ): PQLS.AnalysisSettings {
-    return {
-        inspectionSettings: createInspectionSettings(library, traceManager),
-        isWorkspaceCacheAllowed: serverSettings.isWorkspaceCacheAllowed,
-        traceManager,
-        initialCorrelationId: undefined,
-    };
+	return {
+		inspectionSettings: createInspectionSettings(library, traceManager),
+		isWorkspaceCacheAllowed: serverSettings.isWorkspaceCacheAllowed,
+		traceManager,
+		initialCorrelationId: undefined,
+	};
 }
 
-export function createCancellationToken(cancellationToken: LS.CancellationToken | undefined): PQP.ICancellationToken {
-    return CancellationTokenUtils.createAdapterOrTimedCancellation(cancellationToken, serverSettings.symbolTimeoutInMs);
+export function createCancellationToken(
+	cancellationToken: LS.CancellationToken | undefined
+): PQP.ICancellationToken {
+	return CancellationTokenUtils.createAdapterOrTimedCancellation(
+		cancellationToken,
+		serverSettings.symbolTimeoutInMs
+	);
 }
 
 export function createInspectionSettings(
-    library: PQLS.Library.ILibrary,
-    traceManager: PQP.Trace.TraceManager,
+	library: PQLS.Library.ILibrary,
+	traceManager: PQP.Trace.TraceManager
 ): PQLS.InspectionSettings {
-    return PQLS.InspectionUtils.inspectionSettings(
-        {
-            ...PQP.DefaultSettings,
-            locale: serverSettings.locale,
-            traceManager,
-        },
-        {
-            library,
-            isWorkspaceCacheAllowed: serverSettings.isWorkspaceCacheAllowed,
-            typeStrategy: serverSettings.typeStrategy,
-        },
-    );
+	return PQLS.InspectionUtils.inspectionSettings(
+		{
+			...PQP.DefaultSettings,
+			locale: serverSettings.locale,
+			traceManager,
+		},
+		{
+			library,
+			isWorkspaceCacheAllowed: serverSettings.isWorkspaceCacheAllowed,
+			typeStrategy: serverSettings.typeStrategy,
+		}
+	);
 }
 
 export function createValidationSettings(
-    library: PQLS.Library.ILibrary,
-    traceManager: PQP.Trace.TraceManager,
+	library: PQLS.Library.ILibrary,
+	traceManager: PQP.Trace.TraceManager
 ): PQLS.ValidationSettings {
-    return PQLS.ValidationSettingsUtils.createValidationSettings(
-        createInspectionSettings(library, traceManager),
-        LanguageId,
-        {
-            checkForDuplicateIdentifiers: serverSettings.checkForDuplicateIdentifiers,
-            checkInvokeExpressions: serverSettings.checkInvokeExpressions,
-        },
-    );
+	return PQLS.ValidationSettingsUtils.createValidationSettings(
+		createInspectionSettings(library, traceManager),
+		LanguageId,
+		{
+			checkForDuplicateIdentifiers:
+				serverSettings.checkForDuplicateIdentifiers,
+			checkInvokeExpressions: serverSettings.checkInvokeExpressions,
+		}
+	);
 }
 
-export async function fetchConfigurationSettings(connection: LS.Connection): Promise<ServerSettings> {
-    if (!hasConfigurationCapability) {
-        return DefaultServerSettings;
-    }
+export async function fetchConfigurationSettings(
+	connection: LS.Connection
+): Promise<ServerSettings> {
+	if (!hasConfigurationCapability) {
+		return DefaultServerSettings;
+	}
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const config: any = await connection.workspace.getConfiguration({ section: "powerquery" });
-    const typeStrategy: PQLS.TypeStrategy | undefined = config?.diagnostics?.typeStrategy;
-    const experimental: boolean = config?.general?.experimental;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const config: any = await connection.workspace.getConfiguration({
+		section: "powerquery",
+	});
+	const typeStrategy: PQLS.TypeStrategy | undefined =
+		config?.diagnostics?.typeStrategy;
+	const experimental: boolean = config?.general?.experimental;
 
-    return {
-        checkForDuplicateIdentifiers: true,
-        checkInvokeExpressions: false,
-        experimental,
-        isBenchmarksEnabled: config?.benchmark?.enable ?? false,
-        isWorkspaceCacheAllowed: config?.diagnostics?.isWorkspaceCacheAllowed ?? true,
-        locale: config?.general?.locale ?? PQP.DefaultLocale,
-        mode: deriveMode(config?.general?.mode),
-        symbolTimeoutInMs: config?.timeout?.symbolTimeoutInMs,
-        typeStrategy: typeStrategy ? deriveTypeStrategy(typeStrategy) : PQLS.TypeStrategy.Primitive,
-    };
+	return {
+		checkForDuplicateIdentifiers: true,
+		checkInvokeExpressions: false,
+		experimental,
+		isBenchmarksEnabled: config?.benchmark?.enable ?? false,
+		isWorkspaceCacheAllowed:
+			config?.diagnostics?.isWorkspaceCacheAllowed ?? true,
+		locale: config?.general?.locale ?? PQP.DefaultLocale,
+		mode: deriveMode(config?.general?.mode),
+		symbolTimeoutInMs: config?.timeout?.symbolTimeoutInMs,
+		typeStrategy: typeStrategy
+			? deriveTypeStrategy(typeStrategy)
+			: PQLS.TypeStrategy.Primitive,
+	};
 }
 
 export function getServerSettings(): ServerSettings {
-    return serverSettings;
+	return serverSettings;
 }
 
 export function getLocalizedModuleLibraryFromTextDocument(
-    moduleLibraries: ModuleLibraries,
-    document: TextDocument,
-    updateCache: boolean = false,
+	moduleLibraries: ModuleLibraries,
+	document: TextDocument,
+	updateCache: boolean = false
 ): PQLS.Library.ILibrary {
-    const externalLibraryDefinitionsGetters: LibraryDefinitionsGetter[] = [];
+	const externalLibraryDefinitionsGetters: LibraryDefinitionsGetter[] = [];
 
-    // add the document into module library container, and we need to trace for its validation
-    const closestModuleLibraryTreeNodeOfDefinitions: ModuleLibraryTreeNode =
-        moduleLibraries.addOneTextDocument(document);
+	// add the document into module library container, and we need to trace for its validation
+	const closestModuleLibraryTreeNodeOfDefinitions: ModuleLibraryTreeNode =
+		moduleLibraries.addOneTextDocument(document);
 
-    // I do not believe there would be one m proj at the root of the file system
-    if (!closestModuleLibraryTreeNodeOfDefinitions.isRoot) {
-        externalLibraryDefinitionsGetters.push(closestModuleLibraryTreeNodeOfDefinitions.libraryDefinitionsGetter);
-    }
+	// I do not believe there would be one m proj at the root of the file system
+	if (!closestModuleLibraryTreeNodeOfDefinitions.isRoot) {
+		externalLibraryDefinitionsGetters.push(
+			closestModuleLibraryTreeNodeOfDefinitions.libraryDefinitionsGetter
+		);
+	}
 
-    if (updateCache) {
-        // for validation, we have to forcefully update localizedLibrary to ensure it keeps up to the latest
-        closestModuleLibraryTreeNodeOfDefinitions.cache.localizedLibrary = getLocalizedLibrary(
-            externalLibraryDefinitionsGetters,
-        );
-    } else {
-        closestModuleLibraryTreeNodeOfDefinitions.cache.localizedLibrary =
-            closestModuleLibraryTreeNodeOfDefinitions.cache.localizedLibrary ??
-            getLocalizedLibrary(externalLibraryDefinitionsGetters);
-    }
+	if (updateCache) {
+		// for validation, we have to forcefully update localizedLibrary to ensure it keeps up to the latest
+		closestModuleLibraryTreeNodeOfDefinitions.cache.localizedLibrary =
+			getLocalizedLibrary(externalLibraryDefinitionsGetters);
+	} else {
+		closestModuleLibraryTreeNodeOfDefinitions.cache.localizedLibrary =
+			closestModuleLibraryTreeNodeOfDefinitions.cache.localizedLibrary ??
+			getLocalizedLibrary(externalLibraryDefinitionsGetters);
+	}
 
-    return closestModuleLibraryTreeNodeOfDefinitions.cache.localizedLibrary;
+	return closestModuleLibraryTreeNodeOfDefinitions.cache.localizedLibrary;
 }
 
 export function getLocalizedLibrary(
-    otherLibraryDefinitionsGetters: LibraryDefinitionsGetter[] = [],
+	otherLibraryDefinitionsGetters: LibraryDefinitionsGetter[] = []
 ): PQLS.Library.ILibrary {
-    switch (serverSettings.mode) {
-        case "SDK":
-            return LibraryUtils.getOrCreateSdkLibrary(serverSettings.locale, otherLibraryDefinitionsGetters);
+	switch (serverSettings.mode) {
+		case "SDK":
+			return LibraryUtils.getOrCreateSdkLibrary(
+				serverSettings.locale,
+				otherLibraryDefinitionsGetters
+			);
 
-        case "Power Query":
-            return LibraryUtils.getOrCreateStandardLibrary(serverSettings.locale);
+		case "Power Query":
+			return LibraryUtils.getOrCreateStandardLibrary(
+				serverSettings.locale
+			);
 
-        default:
-            throw PQP.Assert.isNever(serverSettings.mode);
-    }
+		default:
+			throw PQP.Assert.isNever(serverSettings.mode);
+	}
 }
 
 export function getHasConfigurationCapability(): boolean {
-    return hasConfigurationCapability;
+	return hasConfigurationCapability;
 }
 
 export function setHasConfigurationCapability(value: boolean): void {
-    hasConfigurationCapability = value;
+	hasConfigurationCapability = value;
 }
 
 function deriveMode(value: string | undefined): "Power Query" | "SDK" {
-    switch (value) {
-        case "SDK":
-        case "Power Query":
-            return value;
+	switch (value) {
+		case "SDK":
+		case "Power Query":
+			return value;
 
-        default:
-            return "Power Query";
-    }
+		default:
+			return "Power Query";
+	}
 }
 
 function deriveTypeStrategy(value: string): PQLS.TypeStrategy {
-    switch (value) {
-        case PQLS.TypeStrategy.Extended:
-        case PQLS.TypeStrategy.Primitive:
-            return value;
+	switch (value) {
+		case PQLS.TypeStrategy.Extended:
+		case PQLS.TypeStrategy.Primitive:
+			return value;
 
-        default:
-            throw new PQP.CommonError.InvariantError(`could not derive typeStrategy`);
-    }
+		default:
+			throw new PQP.CommonError.InvariantError(
+				`could not derive typeStrategy`
+			);
+	}
 }

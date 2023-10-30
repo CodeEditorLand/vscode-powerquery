@@ -1,64 +1,64 @@
 {
-  "name": "vscode-powerquery-scripts",
-  "version": "0.0.1",
-  "private": "false",
-  "description": "Scripts for vscode-powerquery repository",
-  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
-  "bugs": {
-    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git",
-    "directory": "server"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "Nikola Hristov",
-    "email": "nikola@nikolahristov.tech",
-    "url": "https://nikolahristov.tech"
-  },
-  "publisher": "playform",
-  "type": "module",
-  "main": "lib\\server.d.ts",
-  "types": "lib\\server.d.ts",
-  "scripts": {
-    "build": ".\\node_modules\\.bin\\tsc",
-    "init": "npm install-clean",
-    "link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-language-services",
-    "link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
-    "lint": "eslint src --ext ts",
-    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts",
-    "test": "mocha --reporter mocha-multi-reporters --reporter-options configFile=src/test/mochaConfig.json -r ts-node/register src/test/**/*.ts",
-    "watch": ".\\node_modules\\.bin\\tsc -watch",
-    "webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
-    "webpack-prod": "node_modules\\.bin\\webpack --mode production"
-  },
-  "dependencies": {
-    "@microsoft/powerquery-language-services": "0.9.2",
-    "@microsoft/powerquery-parser": "0.15.6",
-    "vscode-languageserver-textdocument": "1.0.11"
-  },
-  "devDependencies": {
-    "@types/node": "20.8.9",
-    "eslint": "8.52.0",
-    "eslint-config-prettier": "9.0.0",
-    "eslint-plugin-prettier": "5.0.1",
-    "eslint-plugin-promise": "6.1.1",
-    "eslint-plugin-security": "1.7.1",
-    "prettier": "3.0.3",
-    "ts-loader": "9.5.0",
-    "ts-node": "10.9.1",
-    "typescript": "5.2.2",
-    "typescript-esbuild": "0.3.1"
-  },
-  "engines": {
-    "node": ">=16.13.2"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "issues": {
-    "url": "https://github.com/microsoft/vscode-powerquery/issues"
-  }
+	"name": "vscode-powerquery-scripts",
+	"version": "0.0.1",
+	"private": "false",
+	"description": "Scripts for vscode-powerquery repository",
+	"homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
+	"bugs": {
+		"url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git",
+		"directory": "server"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Nikola Hristov",
+		"email": "nikola@nikolahristov.tech",
+		"url": "https://nikolahristov.tech"
+	},
+	"publisher": "playform",
+	"type": "module",
+	"main": "lib\\server.d.ts",
+	"types": "lib\\server.d.ts",
+	"scripts": {
+		"build": ".\\node_modules\\.bin\\tsc",
+		"init": "npm install-clean",
+		"link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-language-services",
+		"link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
+		"lint": "eslint src --ext ts",
+		"prepublishOnly": "TypeScriptESBuild 'Source/**/*.ts'",
+		"test": "mocha --reporter mocha-multi-reporters --reporter-options configFile=src/test/mochaConfig.json -r ts-node/register src/test/**/*.ts",
+		"watch": ".\\node_modules\\.bin\\tsc -watch",
+		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
+		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
+	},
+	"dependencies": {
+		"@microsoft/powerquery-language-services": "0.9.2",
+		"@microsoft/powerquery-parser": "0.15.6",
+		"vscode-languageserver-textdocument": "1.0.11"
+	},
+	"devDependencies": {
+		"@types/node": "20.8.9",
+		"eslint": "8.52.0",
+		"eslint-config-prettier": "9.0.0",
+		"eslint-plugin-prettier": "5.0.1",
+		"eslint-plugin-promise": "6.1.1",
+		"eslint-plugin-security": "1.7.1",
+		"prettier": "3.0.3",
+		"ts-loader": "9.5.0",
+		"ts-node": "10.9.1",
+		"typescript": "5.2.2",
+		"typescript-esbuild": "0.3.1"
+	},
+	"engines": {
+		"node": ">=16.13.2"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"issues": {
+		"url": "https://github.com/microsoft/vscode-powerquery/issues"
+	}
 }
