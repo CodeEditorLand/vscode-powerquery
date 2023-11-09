@@ -1,302 +1,288 @@
 {
-	"name": "vscode-powerquery",
-	"displayName": "Power Query / M Language",
-	"version": "0.0.1",
-	"private": "false",
-	"description": "Language service for the Power Query / M formula language",
-	"categories": [
-		"Programming Languages"
-	],
-	"homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
-	"bugs": {
-		"url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Nikola Hristov",
-		"email": "nikola@nikolahristov.tech",
-		"url": "https://nikolahristov.tech"
-	},
-	"publisher": "playform",
-	"type": "module",
-	"main": "./client/dist/extension",
-	"scripts": {
-		"audit:fix": "npm audit fix && npm run audit:fix:client && npm run audit:fix:server && npm run audit:fix:scripts",
-		"audit:fix:client": "cd client && npm audit fix",
-		"audit:fix:scripts": "cd scripts && npm audit fix",
-		"audit:fix:server": "cd server && npm audit fix",
-		"build": "npm run build:client && npm run build:server && npm run build:scripts",
-		"build:client": "cd client && npm run build",
-		"build:scripts": "cd scripts && npm run build",
-		"build:server": "cd server && npm run build",
-		"postinstall": "npm run install:client && npm run install:server && npm run install:scripts",
-		"install:client": "cd client && npm install-clean",
-		"install:scripts": "cd scripts && npm install-clean",
-		"install:server": "cd server && npm install-clean",
-		"link:start": "npm run link:start:client && npm run link:start:server && npm run link:start:scripts",
-		"link:start:client": "cd client && npm run link:start",
-		"link:start:scripts": "cd scripts && npm run link:start",
-		"link:start:server": "cd server && npm run link:start",
-		"link:stop": "npm run link:stop:client && npm run link:stop:server && npm run link:stop:scripts",
-		"link:stop:client": "cd client && npm run link:stop",
-		"link:stop:scripts": "cd scripts && npm run link:stop",
-		"link:stop:server": "cd server && npm run link:stop",
-		"lint": "npm run lint:client && npm run lint:server",
-		"lint:client": "eslint client/src --ext ts",
-		"lint:scripts": "eslint  scripts --ext ts",
-		"lint:server": "eslint server/src --ext ts",
-		"prepublishOnly": "TypeScriptESBuild 'Source/**/*.ts'",
-		"test": "npm run test:client && npm run test:server",
-		"test:client": "cd client && npm run test",
-		"test:server": "cd server && npm run test",
-		"vscode:prepublish": "npm run webpack-prod",
-		"webpack-dev": "npm run webpack-dev:client && npm run webpack-dev:server",
-		"webpack-dev:client": "cd client && npm run webpack-dev",
-		"webpack-dev:server:": "cd server && npm run webpack-dev",
-		"webpack-prod": "npm run webpack-prod:server && npm run webpack-prod:client",
-		"webpack-prod:client": "cd client && npm run webpack-prod",
-		"webpack-prod:server": "cd server && npm run webpack-prod"
-	},
-	"contributes": {
-		"commands": [
-			{
-				"command": "powerquery.extractDataflowDocument",
-				"title": "Extract document from dataflow.json",
-				"category": "powerquery"
-			},
-			{
-				"command": "powerquery.mEscapeText",
-				"title": "Encode selection as an M text value",
-				"category": "powerquery"
-			},
-			{
-				"command": "powerquery.mUnescapeText",
-				"title": "Remove M text encoding from selection",
-				"category": "powerquery"
-			},
-			{
-				"command": "powerquery.jsonUnescapeText",
-				"title": "Remove JSON string encoding from selection",
-				"category": "powerquery"
-			},
-			{
-				"command": "powerquery.jsonEscapeText",
-				"title": "Encode selection as a JSON value",
-				"category": "powerquery"
-			}
-		],
-		"configuration": {
-			"type": "object",
-			"title": "Power Query",
-			"properties": {
-				"powerquery.benchmark.enable": {
-					"scope": "window",
-					"type": "boolean",
-					"default": false,
-					"description": "Recommended always off. Enables benchmark traces to be generated for the extension."
-				},
-				"powerquery.diagnostics.isWorkspaceCacheAllowed": {
-					"scope": "window",
-					"type": "boolean",
-					"default": true,
-					"description": "Recommended always on. Toggles internal caching causing performance degregation when off. Used to find hot paths in the extension."
-				},
-				"powerquery.diagnostics.typeStrategy": {
-					"scope": "window",
-					"type": "string",
-					"default": "Primitive",
-					"description": "Sets what strategy is used by the type analysis. Extended is useful for small scripts but can hang on larger, complicated files. If performance isn't acceptable then fallback to Primitive.",
-					"enum": [
-						"Extended",
-						"Primitive"
-					]
-				},
-				"powerquery.general.experimental": {
-					"scope": "window",
-					"type": "boolean",
-					"default": false,
-					"description": "Specifies whether to enable experimental features."
-				},
-				"powerquery.general.locale": {
-					"scope": "window",
-					"type": "string",
-					"description": "Locale to use for errors and other messages returned by the language parser.",
-					"enum": [
-						"bg-BG",
-						"ca-EZ",
-						"cs-CZ",
-						"da-DK",
-						"de-DE",
-						"el-GR",
-						"en-US",
-						"es-ES",
-						"et-EE",
-						"eu-ES",
-						"fi-FI",
-						"fr-FR",
-						"gl-ES",
-						"hi-IN",
-						"hr-HR",
-						"hu-HU",
-						"id-ID",
-						"it-IT",
-						"ja-JP",
-						"kk-KZ",
-						"ko-KR",
-						"lt-LT",
-						"lv-LV",
-						"ms-MY",
-						"nb-NO",
-						"nl-NL",
-						"pl-PL",
-						"pt-BR",
-						"pt-PT",
-						"ro-RO",
-						"ru-RU",
-						"sk-SK",
-						"sl-SI",
-						"sr-Cyrl-RS",
-						"sr-Latn-RS",
-						"sv-SE",
-						"th-TH",
-						"tr-TR",
-						"uk-UA",
-						"vi-VN",
-						"zh-CN",
-						"zh-TW"
-					],
-					"default": "en-US"
-				},
-				"powerquery.general.mode": {
-					"scope": "window",
-					"type": "string",
-					"default": "Power Query",
-					"description": "Changes what library functions are available.",
-					"enum": [
-						"Power Query",
-						"SDK"
-					]
-				},
-				"powerquery.timeout.symbolTimeoutInMs": {
-					"scope": "window",
-					"type": "number",
-					"default": 2000,
-					"description": "Symbol provider timeout in milliseconds."
-				},
-				"powerquery.trace.server": {
-					"scope": "window",
-					"type": "string",
-					"enum": [
-						"off",
-						"messages",
-						"verbose"
-					],
-					"default": "off",
-					"description": "Traces the communication between VS Code and the language server."
-				},
-				"powerquery.editor.transformTarget": {
-					"scope": "window",
-					"type": "string",
-					"enum": [
-						"inPlace",
-						"clipboard"
-					],
-					"default": "inPlace",
-					"description": "Default target for text transformation operations - allows the choice of in place (replacing the currently selected text) or storing the results on the clipboard."
-				}
-			}
-		},
-		"grammars": [
-			{
-				"language": "powerquery",
-				"scopeName": "source.powerquery",
-				"path": "./syntaxes/powerquery.tmLanguage.json"
-			}
-		],
-		"languages": [
-			{
-				"id": "powerquery",
-				"aliases": [
-					"Power Query Formula Language",
-					"Power Query/M",
-					"Power Query",
-					"powerquery",
-					"pq",
-					"M"
-				],
-				"extensions": [
-					".pq",
-					".pqout",
-					".pqm",
-					".m",
-					".mout"
-				],
-				"configuration": "./language-configuration.json"
-			}
-		],
-		"menus": {
-			"commandPalette": [
-				{
-					"command": "powerquery.extractDataflowDocument",
-					"when": "editorIsOpen && editorLangId == json"
-				},
-				{
-					"command": "powerquery.mEscapeText",
-					"when": "editorHasSelection"
-				},
-				{
-					"command": "powerquery.mUnescapeText",
-					"when": "editorHasSelection"
-				},
-				{
-					"command": "powerquery.jsonUnescapeText",
-					"when": "editorHasSelection"
-				},
-				{
-					"command": "powerquery.jsonEscapeText",
-					"when": "editorHasSelection"
-				}
-			]
-		}
-	},
-	"activationEvents": [
-		"onLanguage:powerquery",
-		"onCommand:powerquery.extractDataflowDocument",
-		"onCommand:powerquery.mEscapeText",
-		"onCommand:powerquery.mUnescapeText",
-		"onCommand:powerquery.jsonEscapeText",
-		"onCommand:powerquery.jsonUnescapeText"
-	],
-	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "6.9.0",
-		"@typescript-eslint/parser": "6.9.0",
-		"eslint": "8.52.0",
-		"eslint-config-prettier": "9.0.0",
-		"eslint-plugin-prettier": "5.0.1",
-		"eslint-plugin-promise": "6.1.1",
-		"eslint-plugin-security": "1.7.1",
-		"prettier": "3.0.3",
-		"typescript": "5.2.2",
-		"typescript-esbuild": "0.3.1"
-	},
-	"engines": {
-		"node": ">=16.13.2",
-		"vscode": "1.40.0"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"icon": "imgs/PQIcon_256.png",
-	"capabilities": {
-		"untrustedWorkspaces": {
-			"supported": true
-		}
-	},
-	"issues": {
-		"url": "https://github.com/microsoft/vscode-powerquery/issues"
-	}
+    "name": "vscode-powerquery",
+    "version": "0.1.54",
+    "displayName": "Power Query / M Language",
+    "description": "Language service for the Power Query / M formula language",
+    "author": "Microsoft Corporation",
+    "license": "MIT",
+    "homepage": "https://github.com/microsoft/vscode-powerquery#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/microsoft/vscode-powerquery.git"
+    },
+    "issues": {
+        "url": "https://github.com/microsoft/vscode-powerquery/issues"
+    },
+    "scripts": {
+        "postinstall": "npm run install:client && npm run install:server && npm run install:scripts",
+        "install:client": "cd client && npm install-clean",
+        "install:server": "cd server && npm install-clean",
+        "install:scripts": "cd scripts && npm install-clean",
+        "audit:fix": "npm audit fix && npm run audit:fix:client && npm run audit:fix:server && npm run audit:fix:scripts",
+        "audit:fix:client": "cd client && npm audit fix",
+        "audit:fix:server": "cd server && npm audit fix",
+        "audit:fix:scripts": "cd scripts && npm audit fix",
+        "build": "npm run build:client && npm run build:server && npm run build:scripts",
+        "build:client": "cd client && npm run build",
+        "build:server": "cd server && npm run build",
+        "build:scripts": "cd scripts && npm run build",
+        "link:start": "npm run link:start:client && npm run link:start:server && npm run link:start:scripts",
+        "link:start:client": "cd client && npm run link:start",
+        "link:start:server": "cd server && npm run link:start",
+        "link:start:scripts": "cd scripts && npm run link:start",
+        "link:stop": "npm run link:stop:client && npm run link:stop:server && npm run link:stop:scripts",
+        "link:stop:client": "cd client && npm run link:stop",
+        "link:stop:server": "cd server && npm run link:stop",
+        "link:stop:scripts": "cd scripts && npm run link:stop",
+        "lint": "npm run lint:client && npm run lint:server",
+        "lint:client": "eslint client/src --ext ts",
+        "lint:server": "eslint server/src --ext ts",
+        "lint:scripts": "eslint  scripts --ext ts",
+        "test": "npm run test:client && npm run test:server",
+        "test:client": "cd client && npm run test",
+        "test:server": "cd server && npm run test",
+        "webpack-dev": "npm run webpack-dev:client && npm run webpack-dev:server",
+        "webpack-dev:client": "cd client && npm run webpack-dev",
+        "webpack-dev:server:": "cd server && npm run webpack-dev",
+        "webpack-prod": "npm run webpack-prod:server && npm run webpack-prod:client",
+        "webpack-prod:client": "cd client && npm run webpack-prod",
+        "webpack-prod:server": "cd server && npm run webpack-prod",
+        "vscode:prepublish": "npm run webpack-prod"
+    },
+    "icon": "imgs/PQIcon_256.png",
+    "main": "./client/dist/extension",
+    "engines": {
+        "node": ">=16.13.2",
+        "vscode": "^1.40.0"
+    },
+    "capabilities": {
+        "untrustedWorkspaces": {
+            "supported": true
+        }
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:powerquery",
+        "onCommand:powerquery.extractDataflowDocument",
+        "onCommand:powerquery.mEscapeText",
+        "onCommand:powerquery.mUnescapeText",
+        "onCommand:powerquery.jsonEscapeText",
+        "onCommand:powerquery.jsonUnescapeText"
+    ],
+    "publisher": "PowerQuery",
+    "contributes": {
+        "commands": [
+            {
+                "command": "powerquery.extractDataflowDocument",
+                "title": "Extract document from dataflow.json",
+                "category": "powerquery"
+            },
+            {
+                "command": "powerquery.mEscapeText",
+                "title": "Encode selection as an M text value",
+                "category": "powerquery"
+            },
+            {
+                "command": "powerquery.mUnescapeText",
+                "title": "Remove M text encoding from selection",
+                "category": "powerquery"
+            },
+            {
+                "command": "powerquery.jsonUnescapeText",
+                "title": "Remove JSON string encoding from selection",
+                "category": "powerquery"
+            },
+            {
+                "command": "powerquery.jsonEscapeText",
+                "title": "Encode selection as a JSON value",
+                "category": "powerquery"
+            }
+        ],
+        "menus": {
+            "commandPalette": [
+                {
+                    "command": "powerquery.extractDataflowDocument",
+                    "when": "editorIsOpen && editorLangId == json"
+                },
+                {
+                    "command": "powerquery.mEscapeText",
+                    "when": "editorHasSelection"
+                },
+                {
+                    "command": "powerquery.mUnescapeText",
+                    "when": "editorHasSelection"
+                },
+                {
+                    "command": "powerquery.jsonUnescapeText",
+                    "when": "editorHasSelection"
+                },
+                {
+                    "command": "powerquery.jsonEscapeText",
+                    "when": "editorHasSelection"
+                }
+            ]
+        },
+        "configuration": {
+            "type": "object",
+            "title": "Power Query",
+            "properties": {
+                "powerquery.benchmark.enable": {
+                    "scope": "window",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Recommended always off. Enables benchmark traces to be generated for the extension."
+                },
+                "powerquery.diagnostics.isWorkspaceCacheAllowed": {
+                    "scope": "window",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Recommended always on. Toggles internal caching causing performance degregation when off. Used to find hot paths in the extension."
+                },
+                "powerquery.diagnostics.typeStrategy": {
+                    "scope": "window",
+                    "type": "string",
+                    "default": "Primitive",
+                    "description": "Sets what strategy is used by the type analysis. Extended is useful for small scripts but can hang on larger, complicated files. If performance isn't acceptable then fallback to Primitive.",
+                    "enum": [
+                        "Extended",
+                        "Primitive"
+                    ]
+                },
+                "powerquery.general.experimental": {
+                    "scope": "window",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Specifies whether to enable experimental features."
+                },
+                "powerquery.general.locale": {
+                    "scope": "window",
+                    "type": "string",
+                    "description": "Locale to use for errors and other messages returned by the language parser.",
+                    "enum": [
+                        "bg-BG",
+                        "ca-EZ",
+                        "cs-CZ",
+                        "da-DK",
+                        "de-DE",
+                        "el-GR",
+                        "en-US",
+                        "es-ES",
+                        "et-EE",
+                        "eu-ES",
+                        "fi-FI",
+                        "fr-FR",
+                        "gl-ES",
+                        "hi-IN",
+                        "hr-HR",
+                        "hu-HU",
+                        "id-ID",
+                        "it-IT",
+                        "ja-JP",
+                        "kk-KZ",
+                        "ko-KR",
+                        "lt-LT",
+                        "lv-LV",
+                        "ms-MY",
+                        "nb-NO",
+                        "nl-NL",
+                        "pl-PL",
+                        "pt-BR",
+                        "pt-PT",
+                        "ro-RO",
+                        "ru-RU",
+                        "sk-SK",
+                        "sl-SI",
+                        "sr-Cyrl-RS",
+                        "sr-Latn-RS",
+                        "sv-SE",
+                        "th-TH",
+                        "tr-TR",
+                        "uk-UA",
+                        "vi-VN",
+                        "zh-CN",
+                        "zh-TW"
+                    ],
+                    "default": "en-US"
+                },
+                "powerquery.general.mode": {
+                    "scope": "window",
+                    "type": "string",
+                    "default": "Power Query",
+                    "description": "Changes what library functions are available.",
+                    "enum": [
+                        "Power Query",
+                        "SDK"
+                    ]
+                },
+                "powerquery.timeout.symbolTimeoutInMs": {
+                    "scope": "window",
+                    "type": "number",
+                    "default": 2000,
+                    "description": "Symbol provider timeout in milliseconds."
+                },
+                "powerquery.trace.server": {
+                    "scope": "window",
+                    "type": "string",
+                    "enum": [
+                        "off",
+                        "messages",
+                        "verbose"
+                    ],
+                    "default": "off",
+                    "description": "Traces the communication between VS Code and the language server."
+                },
+                "powerquery.editor.transformTarget": {
+                    "scope": "window",
+                    "type": "string",
+                    "enum": [
+                        "inPlace",
+                        "clipboard"
+                    ],
+                    "default": "inPlace",
+                    "description": "Default target for text transformation operations - allows the choice of in place (replacing the currently selected text) or storing the results on the clipboard."
+                }
+            }
+        },
+        "languages": [
+            {
+                "id": "powerquery",
+                "aliases": [
+                    "Power Query Formula Language",
+                    "Power Query/M",
+                    "Power Query",
+                    "powerquery",
+                    "pq",
+                    "M"
+                ],
+                "extensions": [
+                    ".pq",
+                    ".pqout",
+                    ".pqm",
+                    ".m",
+                    ".mout"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "powerquery",
+                "scopeName": "source.powerquery",
+                "path": "./syntaxes/powerquery.tmLanguage.json"
+            }
+        ]
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "5.24.0",
+        "@typescript-eslint/parser": "5.24.0",
+        "eslint": "8.15.0",
+        "eslint-config-prettier": "8.5.0",
+        "eslint-plugin-prettier": "4.0.0",
+        "eslint-plugin-promise": "6.0.0",
+        "eslint-plugin-security": "1.5.0",
+        "prettier": "2.6.2",
+        "typescript": "4.6.4"
+    }
 }
