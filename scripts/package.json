@@ -1,25 +1,22 @@
 {
-	"name": "vscode-powerquery-scripts",
-	"version": "0.0.1",
-	"private": false,
+	"dependencies": {
+		"@microsoft/powerquery-language-services": "0.9.2",
+		"@microsoft/powerquery-parser": "0.15.5",
+		"vscode-languageserver-textdocument": "1.0.4"
+	},
 	"description": "Scripts for vscode-powerquery repository",
-	"homepage": "https://github.com/CodeEditorLand/Foundation#readme",
-	"bugs": {
-		"url": "https://github.com/CodeEditorLand/Foundation/issues"
+	"devDependencies": {
+		"@types/node": "17.0.33",
+		"ts-loader": "9.3.0",
+		"ts-node": "10.7.0",
+		"typescript": "4.6.4",
+		"typescript-esbuild": "0.4.5"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/CodeEditorLand/Foundation.git"
+	"issues": {
+		"url": "https://github.com/microsoft/vscode-powerquery/issues"
 	},
-	"license": "SEE LICENSE IN LICENSE",
-	"author": {
-		"name": "Playform",
-		"email": "Hello@Playform.Cloud",
-		"url": "https://playform.cloud"
-	},
-	"type": "module",
 	"main": "lib\\server.d.ts",
-	"types": "lib\\server.d.ts",
+	"name": "vscode-powerquery-scripts",
 	"scripts": {
 		"build": ".\\node_modules\\.bin\\tsc",
 		"init": "npm install-clean",
@@ -30,22 +27,6 @@
 		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
 		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
 	},
-	"dependencies": {
-		"@microsoft/powerquery-language-services": "0.9.2",
-		"@microsoft/powerquery-parser": "0.15.5",
-		"vscode-languageserver-textdocument": "1.0.4"
-	},
-	"devDependencies": {
-		"@types/node": "17.0.33",
-		"ts-loader": "9.3.0",
-		"ts-node": "10.7.0",
-		"typescript": "4.6.4",
-		"typescript-esbuild": "0.4.5"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"issues": {
-		"url": "https://github.com/microsoft/vscode-powerquery/issues"
-	}
+	"type": "module",
+	"types": "lib\\server.d.ts"
 }
