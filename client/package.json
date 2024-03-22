@@ -1,10 +1,39 @@
 {
+	"name": "vscode-powerquery-client",
+	"version": "0.0.1",
+	"private": false,
+	"description": "VS Code part of language server",
+	"homepage": "https://github.com/CodeEditorLand/Foundation#readme",
+	"bugs": {
+		"url": "https://github.com/CodeEditorLand/Foundation/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/CodeEditorLand/Foundation.git"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"author": {
+		"name": "Playform",
+		"email": "Hello@Playform.Cloud",
+		"url": "https://playform.cloud"
+	},
+	"type": "module",
+	"main": "lib\\extension",
+	"scripts": {
+		"build": ".\\node_modules\\.bin\\tsc",
+		"init": "npm install-clean",
+		"link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-language-services",
+		"link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
+		"prepublishOnly": "TypeScriptESBuild 'Source/**/*.ts'",
+		"watch": ".\\node_modules\\.bin\\tsc -watch",
+		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
+		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
+	},
 	"dependencies": {
 		"@microsoft/powerquery-language-services": "0.9.2",
 		"@microsoft/powerquery-parser": "0.15.5",
 		"vscode-languageclient": "9.0.1"
 	},
-	"description": "VS Code part of language server",
 	"devDependencies": {
 		"@types/chai": "4.3.1",
 		"@types/glob": "7.2.0",
@@ -25,20 +54,10 @@
 		"webpack": "5.90.3",
 		"webpack-cli": "5.1.4"
 	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"issues": {
 		"url": "https://github.com/microsoft/vscode-powerquery/issues"
-	},
-	"main": "lib\\extension",
-	"name": "vscode-powerquery-client",
-	"scripts": {
-		"build": ".\\node_modules\\.bin\\tsc",
-		"init": "npm install-clean",
-		"link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-language-services",
-		"link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
-		"prepublishOnly": "TypeScriptESBuild 'Source/**/*.ts'",
-		"watch": ".\\node_modules\\.bin\\tsc -watch",
-		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
-		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
-	},
-	"type": "module"
+	}
 }
