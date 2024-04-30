@@ -1,61 +1,53 @@
 {
-    "name": "vscode-powerquery-client",
-    "version": "0.0.57",
-    "description": "VS Code part of language server",
-    "author": "Microsoft Corporation",
-    "license": "MIT",
-    "homepage": "https://github.com/microsoft/vscode-powerquery#readme",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/microsoft/vscode-powerquery.git",
-        "directory": "client"
-    },
-    "issues": {
-        "url": "https://github.com/microsoft/vscode-powerquery/issues"
-    },
-    "scripts": {
-        "init": "npm install-clean",
-        "build": ".\\node_modules\\.bin\\tsc",
-        "watch": ".\\node_modules\\.bin\\tsc -watch",
-        "test": "node ./lib/test/runTest.js",
-        "link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-language-services",
-        "link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
-        "lint": "eslint src --ext ts",
-        "webpack-prod": "node_modules\\.bin\\webpack --mode production",
-        "webpack-dev": "node_modules\\.bin\\webpack --watch --mode development"
-    },
-    "main": "lib\\extension",
-    "engines": {
-        "node": ">=18.17.0",
-        "vscode": "^1.87.0"
-    },
-    "dependencies": {
-        "@microsoft/powerquery-language-services": "0.10.1",
-        "@microsoft/powerquery-parser": "0.15.10",
-        "vscode-languageclient": "9.0.1"
-    },
-    "devDependencies": {
-        "@types/chai": "4.3.1",
-        "@types/glob": "7.2.0",
-        "@types/mocha": "9.1.1",
-        "@types/node": "18.19.24",
-        "@types/vscode": "1.87.0",
-        "@vscode/test-electron": "2.3.9",
-        "chai": "4.3.6",
-        "eslint": "8.15.0",
-        "eslint-config-prettier": "8.5.0",
-        "eslint-plugin-prettier": "4.0.0",
-        "eslint-plugin-security": "1.5.0",
-        "glob": "8.0.3",
-        "mocha": "10.0.0",
-        "mocha-junit-reporter": "2.0.2",
-        "mocha-multi-reporters": "1.5.1",
-        "npm-check-updates": "16.1.0",
-        "prettier": "2.6.2",
-        "ts-loader": "9.3.0",
-        "ts-node": "10.7.0",
-        "typescript": "4.6.4",
-        "webpack": "5.90.3",
-        "webpack-cli": "5.1.4"
-    }
+	"name": "vscode-powerquery-client",
+	"version": "0.0.1",
+	"private": false,
+	"description": "VS Code part of language server",
+	"keywords": [
+		"land"
+	],
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandPowerquery#readme",
+	"bugs": {
+		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandPowerquery/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+HTTPS://github.com/CodeEditorLand/LandPowerquery.git"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"author": {
+		"name": "🌆 — Land —",
+		"email": "Land@PlayForm.Cloud",
+		"url": "HTTPS://Land.PlayForm.Cloud"
+	},
+	"type": "module",
+	"main": "lib\\extension",
+	"scripts": {
+		"Document": "Document 'Source/**/*.ts'",
+		"build": ".\\node_modules\\.bin\\tsc",
+		"init": "npm install-clean",
+		"link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-language-services",
+		"link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
+		"prepublishOnly": "Build 'Source/**/*.ts'",
+		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
+		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@playform/build": "0.0.7",
+		"@playform/document": "0.0.6",
+		"@types/chai": "4.3.1",
+		"@types/glob": "7.2.0",
+		"@types/node": "18.19.24",
+		"chai": "4.3.6",
+		"glob": "8.0.3",
+		"npm-check-updates": "16.1.0",
+		"ts-loader": "9.3.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"issues": {
+		"url": "https://github.com/microsoft/vscode-powerquery/issues"
+	}
 }
