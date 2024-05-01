@@ -1,14 +1,38 @@
 {
-	"author": {
-		"email": "Land@PlayForm.Cloud",
-		"name": "🌆 — Land —",
-		"url": "HTTPS://Land.PlayForm.Cloud"
-	},
+	"name": "vscode-powerquery-client",
+	"version": "0.0.1",
+	"private": false,
+	"description": "VS Code part of language server",
+	"keywords": [
+		"land"
+	],
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandPowerquery#readme",
 	"bugs": {
 		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandPowerquery/issues"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+HTTPS://github.com/CodeEditorLand/LandPowerquery.git"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"author": {
+		"name": "🌆 — Land —",
+		"email": "Land@PlayForm.Cloud",
+		"url": "HTTPS://Land.PlayForm.Cloud"
+	},
+	"type": "module",
+	"main": "lib\\extension",
+	"scripts": {
+		"Document": "Document 'Source/**/*.ts'",
+		"build": ".\\node_modules\\.bin\\tsc",
+		"init": "npm install-clean",
+		"link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-language-services",
+		"link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
+		"prepublishOnly": "Build 'Source/**/*.ts'",
+		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
+		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
+	},
 	"dependencies": {},
-	"description": "VS Code part of language server",
 	"devDependencies": {
 		"@playform/build": "0.0.7",
 		"@playform/document": "0.0.6",
@@ -20,34 +44,10 @@
 		"npm-check-updates": "16.14.20",
 		"ts-loader": "9.5.1"
 	},
-	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandPowerquery#readme",
-	"issues": {
-		"url": "https://github.com/microsoft/vscode-powerquery/issues"
-	},
-	"keywords": [
-		"land"
-	],
-	"license": "SEE LICENSE IN LICENSE",
-	"main": "lib\\extension",
-	"name": "vscode-powerquery-client",
-	"private": false,
 	"publishConfig": {
 		"access": "public"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+HTTPS://github.com/CodeEditorLand/LandPowerquery.git"
-	},
-	"scripts": {
-		"Document": "Document 'Source/**/*.ts'",
-		"build": ".\\node_modules\\.bin\\tsc",
-		"init": "npm install-clean",
-		"link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-language-services",
-		"link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
-		"prepublishOnly": "Build 'Source/**/*.ts'",
-		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
-		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
-	},
-	"type": "module",
-	"version": "0.0.1"
+	"issues": {
+		"url": "https://github.com/microsoft/vscode-powerquery/issues"
+	}
 }

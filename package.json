@@ -1,17 +1,67 @@
 {
-	"activationEvents": [],
-	"author": {
-		"email": "Land@PlayForm.Cloud",
-		"name": "🌆 — Land —",
-		"url": "HTTPS://Land.PlayForm.Cloud"
-	},
+	"name": "vscode-powerquery",
+	"displayName": "Power Query / M Language",
+	"version": "0.0.1",
+	"private": false,
+	"description": "Language service for the Power Query / M formula language",
+	"keywords": [
+		"land"
+	],
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandPowerquery#readme",
 	"bugs": {
 		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandPowerquery/issues"
 	},
-	"capabilities": {
-		"untrustedWorkspaces": {
-			"supported": true
-		}
+	"repository": {
+		"type": "git",
+		"url": "git+HTTPS://github.com/CodeEditorLand/LandPowerquery.git"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"author": {
+		"name": "🌆 — Land —",
+		"email": "Land@PlayForm.Cloud",
+		"url": "HTTPS://Land.PlayForm.Cloud"
+	},
+	"type": "module",
+	"main": "./client/dist/extension",
+	"scripts": {
+		"Document": "Document 'Source/**/*.ts'",
+		"audit": "npm audit fix && npm run audit:client && npm run audit:server && npm run audit:scripts",
+		"audit:client": "cd client && npm audit",
+		"audit:fix": "npm audit fix && npm run audit:fix:client && npm run audit:fix:server && npm run audit:fix:scripts",
+		"audit:fix:client": "cd client && npm audit fix",
+		"audit:fix:scripts": "cd scripts && npm audit fix",
+		"audit:fix:server": "cd server && npm audit fix",
+		"audit:scripts": "cd scripts && npm audit",
+		"audit:server": "cd server && npm audit",
+		"build": "npm run build:client && npm run build:server && npm run build:scripts",
+		"build:client": "cd client && npm run build",
+		"build:scripts": "cd scripts && npm run build",
+		"build:server": "cd server && npm run build",
+		"install:client": "cd client && npm install-clean",
+		"install:scripts": "cd scripts && npm install-clean",
+		"install:server": "cd server && npm install-clean",
+		"link:start": "npm run link:start:client && npm run link:start:server && npm run link:start:scripts",
+		"link:start:client": "cd client && npm run link:start",
+		"link:start:scripts": "cd scripts && npm run link:start",
+		"link:start:server": "cd server && npm run link:start",
+		"link:stop": "npm run link:stop:client && npm run link:stop:server && npm run link:stop:scripts",
+		"link:stop:client": "cd client && npm run link:stop",
+		"link:stop:scripts": "cd scripts && npm run link:stop",
+		"link:stop:server": "cd server && npm run link:stop",
+		"prepublishOnly": "Build 'Source/**/*.ts'",
+		"test:client": "cd client && npm run test",
+		"test:server": "cd server && npm run test",
+		"version": "npm version patch && npm run version:client && npm run version:server && npm run version:scripts",
+		"version:client": "cd client && npm version patch",
+		"version:scripts": "cd scripts && npm version patch",
+		"version:server": "cd server && npm version patch",
+		"vsix": "vsce package",
+		"webpack-dev": "npm run webpack-dev:client && npm run webpack-dev:server",
+		"webpack-dev:client": "cd client && npm run webpack-dev",
+		"webpack-dev:server:": "cd server && npm run webpack-dev",
+		"webpack-prod": "npm run webpack-prod:server && npm run webpack-prod:client",
+		"webpack-prod:client": "cd client && npm run webpack-prod",
+		"webpack-prod:server": "cd server && npm run webpack-prod"
 	},
 	"contributes": {
 		"commands": [
@@ -215,71 +265,21 @@
 			]
 		}
 	},
-	"description": "Language service for the Power Query / M formula language",
+	"activationEvents": [],
 	"devDependencies": {
 		"@playform/build": "0.0.7",
 		"@playform/document": "0.0.6"
 	},
-	"displayName": "Power Query / M Language",
-	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandPowerquery#readme",
-	"icon": "imgs/PQIcon_256.png",
-	"issues": {
-		"url": "https://github.com/microsoft/vscode-powerquery/issues"
-	},
-	"keywords": [
-		"land"
-	],
-	"license": "SEE LICENSE IN LICENSE",
-	"main": "./client/dist/extension",
-	"name": "vscode-powerquery",
-	"private": false,
 	"publishConfig": {
 		"access": "public"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+HTTPS://github.com/CodeEditorLand/LandPowerquery.git"
+	"icon": "imgs/PQIcon_256.png",
+	"capabilities": {
+		"untrustedWorkspaces": {
+			"supported": true
+		}
 	},
-	"scripts": {
-		"Document": "Document 'Source/**/*.ts'",
-		"audit": "npm audit fix && npm run audit:client && npm run audit:server && npm run audit:scripts",
-		"audit:client": "cd client && npm audit",
-		"audit:fix": "npm audit fix && npm run audit:fix:client && npm run audit:fix:server && npm run audit:fix:scripts",
-		"audit:fix:client": "cd client && npm audit fix",
-		"audit:fix:scripts": "cd scripts && npm audit fix",
-		"audit:fix:server": "cd server && npm audit fix",
-		"audit:scripts": "cd scripts && npm audit",
-		"audit:server": "cd server && npm audit",
-		"build": "npm run build:client && npm run build:server && npm run build:scripts",
-		"build:client": "cd client && npm run build",
-		"build:scripts": "cd scripts && npm run build",
-		"build:server": "cd server && npm run build",
-		"install:client": "cd client && npm install-clean",
-		"install:scripts": "cd scripts && npm install-clean",
-		"install:server": "cd server && npm install-clean",
-		"link:start": "npm run link:start:client && npm run link:start:server && npm run link:start:scripts",
-		"link:start:client": "cd client && npm run link:start",
-		"link:start:scripts": "cd scripts && npm run link:start",
-		"link:start:server": "cd server && npm run link:start",
-		"link:stop": "npm run link:stop:client && npm run link:stop:server && npm run link:stop:scripts",
-		"link:stop:client": "cd client && npm run link:stop",
-		"link:stop:scripts": "cd scripts && npm run link:stop",
-		"link:stop:server": "cd server && npm run link:stop",
-		"prepublishOnly": "Build 'Source/**/*.ts'",
-		"test:client": "cd client && npm run test",
-		"test:server": "cd server && npm run test",
-		"version": "npm version patch && npm run version:client && npm run version:server && npm run version:scripts",
-		"version:client": "cd client && npm version patch",
-		"version:scripts": "cd scripts && npm version patch",
-		"version:server": "cd server && npm version patch",
-		"vsix": "vsce package",
-		"webpack-dev": "npm run webpack-dev:client && npm run webpack-dev:server",
-		"webpack-dev:client": "cd client && npm run webpack-dev",
-		"webpack-dev:server:": "cd server && npm run webpack-dev",
-		"webpack-prod": "npm run webpack-prod:server && npm run webpack-prod:client",
-		"webpack-prod:client": "cd client && npm run webpack-prod",
-		"webpack-prod:server": "cd server && npm run webpack-prod"
-	},
-	"type": "module",
-	"version": "0.0.1"
+	"issues": {
+		"url": "https://github.com/microsoft/vscode-powerquery/issues"
+	}
 }
