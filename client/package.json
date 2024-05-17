@@ -1,26 +1,6 @@
 {
 	"name": "vscode-powerquery-client",
-	"version": "0.0.1",
-	"private": false,
 	"description": "VS Code part of language server",
-	"keywords": [
-		"land"
-	],
-	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandPowerquery#readme",
-	"bugs": {
-		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandPowerquery/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+HTTPS://github.com/CodeEditorLand/LandPowerquery.git"
-	},
-	"license": "SEE LICENSE IN LICENSE",
-	"author": {
-		"name": "🛬 Land —",
-		"email": "Land@PlayForm.Cloud",
-		"url": "HTTPS://Land.PlayForm.Cloud"
-	},
-	"type": "module",
 	"main": "lib\\extension",
 	"scripts": {
 		"Document": "Document 'Source/**/*.ts'",
@@ -35,7 +15,6 @@
 	"dependencies": {},
 	"devDependencies": {
 		"@playform/build": "0.0.7",
-		"@playform/document": "0.0.6",
 		"@types/chai": "4.3.16",
 		"@types/glob": "8.1.0",
 		"@types/node": "20.12.10",
@@ -43,9 +22,6 @@
 		"glob": "10.3.12",
 		"npm-check-updates": "16.14.20",
 		"ts-loader": "9.5.1"
-	},
-	"publishConfig": {
-		"access": "public"
 	},
 	"issues": {
 		"url": "https://github.com/microsoft/vscode-powerquery/issues"
