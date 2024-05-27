@@ -1,51 +1,22 @@
 {
-    "name": "vscode-powerquery-scripts",
-    "version": "0.0.57",
-    "description": "Scripts for vscode-powerquery repository",
-    "author": "Microsoft Corporation",
-    "license": "MIT",
-    "homepage": "https://github.com/microsoft/vscode-powerquery#readme",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/microsoft/vscode-powerquery.git",
-        "directory": "server"
-    },
-    "issues": {
-        "url": "https://github.com/microsoft/vscode-powerquery/issues"
-    },
-    "scripts": {
-        "init": "npm install-clean",
-        "build": ".\\node_modules\\.bin\\tsc",
-        "watch": ".\\node_modules\\.bin\\tsc -watch",
-        "test": "mocha --reporter mocha-multi-reporters --reporter-options configFile=src/test/mochaConfig.json -r ts-node/register src/test/**/*.ts",
-        "link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-language-services",
-        "link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
-        "lint": "eslint src --ext ts",
-        "webpack-prod": "node_modules\\.bin\\webpack --mode production",
-        "webpack-dev": "node_modules\\.bin\\webpack --watch --mode development"
-    },
-    "main": "lib\\server.d.ts",
-    "types": "lib\\server.d.ts",
-    "engines": {
-        "node": ">=16.13.2"
-    },
-    "dependencies": {
-        "@microsoft/powerquery-language-services": "0.10.1",
-        "@microsoft/powerquery-parser": "0.15.10",
-        "vscode-languageserver-textdocument": "1.0.4"
-    },
-    "devDependencies": {
-        "@types/mocha": "10.0.6",
-        "@types/node": "17.0.33",
-        "eslint": "8.15.0",
-        "eslint-config-prettier": "8.5.0",
-        "eslint-plugin-prettier": "4.0.0",
-        "eslint-plugin-promise": "6.0.0",
-        "eslint-plugin-security": "1.5.0",
-        "mocha": "10.4.0",
-        "prettier": "2.6.2",
-        "ts-loader": "9.3.0",
-        "ts-node": "10.7.0",
-        "typescript": "4.6.4"
-    }
+	"name": "vscode-powerquery-scripts",
+	"description": "Scripts for vscode-powerquery repository",
+	"main": "lib\\server.d.ts",
+	"types": "lib\\server.d.ts",
+	"scripts": {
+		"build": ".\\node_modules\\.bin\\tsc",
+		"init": "npm install-clean",
+		"link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-language-services",
+		"link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
+		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
+		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@types/node": "17.0.33",
+		"ts-loader": "9.3.0"
+	},
+	"issues": {
+		"url": "https://github.com/microsoft/vscode-powerquery/issues"
+	}
 }
