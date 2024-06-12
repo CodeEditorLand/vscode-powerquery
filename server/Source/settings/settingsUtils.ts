@@ -6,7 +6,7 @@ import * as PQLS from "@microsoft/powerquery-language-services";
 import * as PQP from "@microsoft/powerquery-parser";
 
 import { DefaultServerSettings, ServerSettings } from "./settings";
-import { ExternalLibraryUtils, LibrarySymbolUtils, LibraryUtils, ModuleLibraryUtils } from "../library";
+import { LibrarySymbolUtils, LibraryUtils, ModuleLibraryUtils } from "../library";
 import { CancellationTokenUtils } from "../cancellationToken";
 
 const LanguageId: string = "powerquery";
@@ -105,10 +105,7 @@ export function getLibrary(uri: string): PQLS.Library.ILibrary {
 
     return LibraryUtils.createLibraryAndSetCache(
         cacheKey,
-        [
-            LibrarySymbolUtils.getSymbolsForLocaleAndMode(serverSettings.locale, serverSettings.mode),
-            ExternalLibraryUtils.getSymbols().flat(),
-        ],
+        [LibrarySymbolUtils.getSymbolsForLocaleAndMode(serverSettings.locale, serverSettings.mode)],
         [ModuleLibraryUtils.getAsDynamicLibraryDefinitions(uri)],
     );
 }

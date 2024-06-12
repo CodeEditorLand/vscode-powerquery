@@ -10,10 +10,9 @@ import { TextDocument } from "vscode-languageserver-textdocument";
 import * as ErrorUtils from "./errorUtils";
 import * as EventHandlerUtils from "./eventHandlerUtils";
 import * as TraceManagerUtils from "./traceManagerUtils";
-import { ExternalLibraryUtils, LibraryUtils, ModuleLibraryUtils } from "./library";
-import { SettingsUtils } from "./settings";
+import { LibraryUtils, ModuleLibraryUtils } from "./library";
 
-type LibraryJson = ReadonlyArray<PQLS.LibrarySymbol.LibrarySymbol>;
+import { SettingsUtils } from "./settings";
 
 interface SemanticTokenParams {
     readonly textDocumentUri: string;
@@ -22,15 +21,7 @@ interface SemanticTokenParams {
 
 interface ModuleLibraryUpdatedParams {
     readonly workspaceUriPath: string;
-    readonly library: LibraryJson;
-}
-
-interface AddLibrarySymbolsParams {
-    readonly librarySymbols: ReadonlyArray<[string, LibraryJson]>;
-}
-
-interface RemoveLibrarySymbolsParams {
-    readonly librariesToRemove: ReadonlyArray<string>;
+    readonly library: ReadonlyArray<PQLS.LibrarySymbol.LibrarySymbol>;
 }
 
 // Create a connection for the server. The connection uses Node's IPC as a transport.
@@ -207,12 +198,6 @@ connection.onInitialize((params: LS.InitializeParams) => {
             triggerCharacters: ["(", ","],
         },
         textDocumentSync: LS.TextDocumentSyncKind.Incremental,
-        workspace: {
-            // TODO: Disabling until we've fully tested support for multiple workspace folders
-            workspaceFolders: {
-                supported: false,
-            },
-        },
     };
 
     SettingsUtils.setHasConfigurationCapability(Boolean(params.capabilities.workspace?.configuration));
@@ -279,34 +264,11 @@ connection.onRequest("powerquery/semanticTokens", async (params: SemanticTokenPa
     }
 });
 
-connection.onRequest(
-    "powerquery/moduleLibraryUpdated",
-    EventHandlerUtils.genericRequestHandler((params: ModuleLibraryUpdatedParams) => {
-        ModuleLibraryUtils.onModuleAdded(params.workspaceUriPath, params.library);
-        LibraryUtils.clearCache();
-        connection.languages.diagnostics.refresh();
-    }),
-);
-
-connection.onRequest(
-    "powerquery/addLibrarySymbols",
-    EventHandlerUtils.genericRequestHandler((params: AddLibrarySymbolsParams) => {
-        // JSON-RPC doesn't support sending Maps, so we have to convert from tuple array.
-        const symbolMaps: ReadonlyMap<string, LibraryJson> = new Map(params.librarySymbols);
-        ExternalLibraryUtils.addLibaries(symbolMaps);
-        LibraryUtils.clearCache();
-        connection.languages.diagnostics.refresh();
-    }),
-);
-
-connection.onRequest(
-    "powerquery/removeLibrarySymbols",
-    EventHandlerUtils.genericRequestHandler((params: RemoveLibrarySymbolsParams) => {
-        ExternalLibraryUtils.removeLibraries(params.librariesToRemove);
-        LibraryUtils.clearCache();
-        connection.languages.diagnostics.refresh();
-    }),
-);
+connection.onRequest("powerquery/moduleLibraryUpdated", (params: ModuleLibraryUpdatedParams): void => {
+    ModuleLibraryUtils.onModuleAdded(params.workspaceUriPath, params.library);
+    LibraryUtils.clearCache();
+    connection.languages.diagnostics.refresh();
+});
 
 connection.onSignatureHelp(
     async (
@@ -456,7 +418,7 @@ async function documentSymbols(
 
     try {
         return PQLS.getDocumentSymbols(triedParseState.value.contextState.nodeIdMapCollection, pqpCancellationToken);
-    } catch (error: unknown) {
+    } catch (error) {
         ErrorUtils.handleError(connection, error, "onDocumentSymbol", traceManager);
 
         return undefined;
