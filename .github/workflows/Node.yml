@@ -57,7 +57,7 @@ jobs:
                 node-version: [18, 19, 20]
 
         steps:
-            - uses: actions/checkout@v4.1.6
+            - uses: actions/checkout@v4.1.7
 
             - uses: pnpm/action-setup@v4.0.0
               with:
@@ -91,9 +91,6 @@ jobs:
                   name: .-client-Node-${{ matrix.node-version }}-Target
                   path: ./client/Target
 
-            - run: pnpm run test
-              working-directory: ./client
-
             - uses: actions/setup-node@v4.0.2
               with:
                   node-version: ${{ matrix.node-version }}
@@ -110,9 +107,6 @@ jobs:
               with:
                   name: .-Node-${{ matrix.node-version }}-Target
                   path: ./Target
-
-            - run: pnpm run test
-              working-directory: .
 
             - uses: actions/setup-node@v4.0.2
               with:
@@ -131,9 +125,6 @@ jobs:
                   name: .-scripts-Node-${{ matrix.node-version }}-Target
                   path: ./scripts/Target
 
-            - run: pnpm run test
-              working-directory: ./scripts
-
             - uses: actions/setup-node@v4.0.2
               with:
                   node-version: ${{ matrix.node-version }}
@@ -150,6 +141,3 @@ jobs:
               with:
                   name: .-server-Node-${{ matrix.node-version }}-Target
                   path: ./server/Target
-
-            - run: pnpm run test
-              working-directory: ./server
