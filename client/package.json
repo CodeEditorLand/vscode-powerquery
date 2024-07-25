@@ -1,20 +1,7 @@
 {
-	"dependencies": {},
-	"description": "VS Code part of language server",
-	"devDependencies": {
-		"@types/chai": "4.3.1",
-		"@types/glob": "7.2.0",
-		"@types/node": "20.12.12",
-		"chai": "4.3.6",
-		"glob": "8.0.3",
-		"npm-check-updates": "16.1.0",
-		"ts-loader": "9.5.1"
-	},
-	"issues": {
-		"url": "https://github.com/microsoft/vscode-powerquery/issues"
-	},
-	"main": "lib\\extension",
 	"name": "vscode-powerquery-client",
+	"description": "VS Code part of language server",
+	"main": "lib\\extension",
 	"scripts": {
 		"build": ".\\node_modules\\.bin\\tsc",
 		"init": "npm install-clean",
@@ -22,5 +9,18 @@
 		"link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
 		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
 		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@types/chai": "4.3.16",
+		"@types/glob": "8.1.0",
+		"@types/node": "20.14.12",
+		"chai": "5.1.1",
+		"glob": "11.0.0",
+		"npm-check-updates": "17.0.0-6",
+		"ts-loader": "9.5.1"
+	},
+	"issues": {
+		"url": "https://github.com/microsoft/vscode-powerquery/issues"
 	}
 }
