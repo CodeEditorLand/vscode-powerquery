@@ -2,7 +2,9 @@
 
 ## BenchmarkFile
 
-Runs an lex/parse/inspection on a given file at the given location. Position is given in the form of `lineNumber:columnNumber`, where the first possible position is `0:0`.
+Runs an lex/parse/inspection on a given file at the given location. Position is
+given in the form of `lineNumber:columnNumber`, where the first possible
+position is `0:0`.
 
 ### Example
 
