@@ -1,0 +1,9 @@
+**/*
+!language-configuration.json
+!LICENSE
+!package.json
+!README.md
+!client/dist/**/*.js
+!imgs/PQIcon_256.png
+!server/dist/**/*.js
+!syntaxes/*.json
