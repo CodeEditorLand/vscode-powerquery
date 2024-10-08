@@ -2,7 +2,7 @@
 	"dependencies": {},
 	"description": "Scripts for vscode-powerquery repository",
 	"devDependencies": {
-		"@types/node": "22.7.4",
+		"@types/node": "22.7.5",
 		"ts-loader": "9.5.1"
 	},
 	"issues": {
