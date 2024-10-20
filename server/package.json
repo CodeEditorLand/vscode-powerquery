@@ -3,7 +3,7 @@
 	"description": "Power Query language server implementation.",
 	"devDependencies": {
 		"@types/chai": "5.0.0",
-		"@types/node": "22.7.6",
+		"@types/node": "22.7.7",
 		"chai": "5.1.1",
 		"cross-env": "7.0.3",
 		"ts-loader": "9.5.1"
