@@ -2,8 +2,8 @@
 	"dependencies": {},
 	"description": "Power Query language server implementation.",
 	"devDependencies": {
-		"@types/chai": "5.0.0",
-		"@types/node": "22.8.1",
+		"@types/chai": "5.0.1",
+		"@types/node": "22.8.2",
 		"chai": "5.1.2",
 		"cross-env": "7.0.3",
 		"ts-loader": "9.5.1"
