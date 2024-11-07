@@ -4,10 +4,10 @@
 	"devDependencies": {
 		"@types/chai": "5.0.1",
 		"@types/glob": "8.1.0",
-		"@types/node": "22.8.6",
+		"@types/node": "22.9.0",
 		"chai": "5.1.2",
 		"glob": "11.0.0",
-		"npm-check-updates": "17.1.9",
+		"npm-check-updates": "17.1.10",
 		"ts-loader": "9.5.1"
 	},
 	"issues": {
