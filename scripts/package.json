@@ -1,6 +1,14 @@
 {
-	"name": "vscode-powerquery-scripts",
+	"dependencies": {},
 	"description": "Scripts for vscode-powerquery repository",
+	"devDependencies": {
+		"@types/node": "22.9.1",
+		"ts-loader": "9.5.1"
+	},
+	"issues": {
+		"url": "https://github.com/microsoft/vscode-powerquery/issues"
+	},
+	"name": "vscode-powerquery-scripts",
 	"scripts": {
 		"build": ".\\node_modules\\.bin\\tsc",
 		"init": "npm install-clean",
@@ -8,13 +16,5 @@
 		"link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-language-services@latest --save-exact",
 		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
 		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
-	},
-	"dependencies": {},
-	"devDependencies": {
-		"@types/node": "22.9.1",
-		"ts-loader": "9.5.1"
-	},
-	"issues": {
-		"url": "https://github.com/microsoft/vscode-powerquery/issues"
 	}
 }
