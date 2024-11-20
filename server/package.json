@@ -1,6 +1,17 @@
 {
-	"dependencies": {},
+	"name": "vscode-powerquery-server",
 	"description": "Power Query language server implementation.",
+	"main": "lib\\server.d.ts",
+	"types": "lib\\server.d.ts",
+	"scripts": {
+		"build": ".\\node_modules\\.bin\\tsc",
+		"init": "npm install-clean",
+		"link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-formatter @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-formatter @microsoft/powerquery-language-services",
+		"link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-formatter @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-formatter@latest @microsoft/powerquery-language-services@latest --save-exact",
+		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
+		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
+	},
+	"dependencies": {},
 	"devDependencies": {
 		"@types/chai": "5.0.1",
 		"@types/node": "22.9.1",
@@ -10,16 +21,5 @@
 	},
 	"issues": {
 		"url": "https://github.com/microsoft/vscode-powerquery/issues"
-	},
-	"main": "lib\\server.d.ts",
-	"name": "vscode-powerquery-server",
-	"scripts": {
-		"build": ".\\node_modules\\.bin\\tsc",
-		"init": "npm install-clean",
-		"link:start": "npm link && npm uninstall @microsoft/powerquery-parser @microsoft/powerquery-formatter @microsoft/powerquery-language-services && git clean -xdf && npm install && npm link @microsoft/powerquery-parser @microsoft/powerquery-formatter @microsoft/powerquery-language-services",
-		"link:stop": "npm unlink @microsoft/powerquery-parser @microsoft/powerquery-formatter @microsoft/powerquery-language-services && git clean -xdf && npm install && npm install @microsoft/powerquery-parser@latest @microsoft/powerquery-formatter@latest @microsoft/powerquery-language-services@latest --save-exact",
-		"webpack-dev": "node_modules\\.bin\\webpack --watch --mode development",
-		"webpack-prod": "node_modules\\.bin\\webpack --mode production"
-	},
-	"types": "lib\\server.d.ts"
+	}
 }
