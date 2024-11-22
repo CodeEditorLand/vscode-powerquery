@@ -22,6 +22,7 @@ export function handleError(
 	traceManager: TraceManager,
 ): void {
 	const trace: Trace = traceManager.entry("handleError", action, undefined);
+
 	let vscodeMessage: string;
 
 	if (

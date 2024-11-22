@@ -94,6 +94,7 @@ function assertLibrarySymbolFunctionParameter(
 
 	if (functionParam.fields !== null && functionParam.fields !== undefined) {
 		assertIsArray(functionParam.fields);
+
 		functionParam.fields.forEach(assertLibrarySymbolRecordField);
 	}
 

@@ -73,6 +73,7 @@ export class LibrarySymbolManager {
 		const symbolFileActions: Promise<
 			[vscode.Uri, LibraryJson] | undefined
 		>[] = [];
+
 		const files: ReadonlyArray<vscode.Uri> = (
 			await Promise.all(fileDiscoveryActions)
 		).flat();
@@ -181,6 +182,7 @@ export class LibrarySymbolManager {
 	): Promise<[vscode.Uri, LibraryJson] | undefined> {
 		try {
 			const contents: Uint8Array = await this.fs.readFile(fileUri);
+
 			const text: string = new TextDecoder(
 				LibrarySymbolManager.SymbolFileEncoding,
 			).decode(contents);

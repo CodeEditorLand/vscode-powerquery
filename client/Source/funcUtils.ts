@@ -11,6 +11,7 @@ export function debounce<This, Parameters extends unknown[]>(
 	timeout: number,
 ): (this: This, ...args: Parameters) => void {
 	let _args: Parameters;
+
 	let _this: This;
 
 	let triggerId: ReturnType<typeof setTimeout>;

@@ -17,6 +17,7 @@ import { DefaultServerSettings, ServerSettings } from "./settings";
 const LanguageId: string = "powerquery";
 
 let serverSettings: ServerSettings = DefaultServerSettings;
+
 let hasConfigurationCapability: boolean = false;
 
 export async function initializeServerSettings(
@@ -92,8 +93,10 @@ export async function fetchConfigurationSettings(
 	const config: any = await connection.workspace.getConfiguration({
 		section: "powerquery",
 	});
+
 	const typeStrategy: PQLS.TypeStrategy | undefined =
 		config?.diagnostics?.typeStrategy;
+
 	const experimental: boolean = config?.general?.experimental;
 
 	return {
@@ -121,6 +124,7 @@ export function getLibrary(uri: string): PQLS.Library.ILibrary {
 		serverSettings.locale,
 		serverSettings.mode,
 	);
+
 	const result: PQLS.Library.ILibrary | undefined =
 		LibraryUtils.getLibrary(cacheKey);
 

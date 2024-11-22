@@ -33,6 +33,7 @@ export function wrapSmartTypeResolver(
 			PQP.Trace.NoOpTraceManagerInstance,
 			undefined,
 		);
+
 		const maybeSmartTypeResolverFn: SmartTypeResolverFn | undefined =
 			SmartTypeResolverFns.get(key);
 
@@ -74,9 +75,11 @@ function resolveTableAddColumn(
 	const table: Type.TPowerQueryType = TypeUtils.assertAsTable(
 		PQP.Assert.asDefined(args[0]),
 	);
+
 	const columnName: Type.TText = TypeUtils.assertAsText(
 		PQP.Assert.asDefined(args[1]),
 	);
+
 	const columnGenerator: Type.TFunction = TypeUtils.assertAsFunction(
 		PQP.Assert.asDefined(args[2]),
 	);

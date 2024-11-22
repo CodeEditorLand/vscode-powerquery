@@ -39,6 +39,7 @@ export function toLibraryDefinitions(
 		string,
 		PQLS.Library.TLibraryDefinition
 	>;
+
 	let invalidSymbols: ReadonlyArray<PQLS.LibrarySymbol.LibrarySymbol>;
 
 	if (PQP.PartialResultUtils.isOk(libraryDefinitionsResult)) {

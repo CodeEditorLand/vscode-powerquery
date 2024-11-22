@@ -40,6 +40,7 @@ interface RemoveLibrarySymbolsParams {
 // Create a connection for the server. The connection uses Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
 const connection: LS.Connection = LS.createConnection(LS.ProposedFeatures.all);
+
 const documents: LS.TextDocuments<TextDocument> = new LS.TextDocuments(
 	TextDocument,
 );
@@ -168,11 +169,13 @@ connection.onFoldingRanges(
 
 		const pqpCancellationToken: PQP.ICancellationToken =
 			SettingsUtils.createCancellationToken(cancellationToken);
+
 		const traceManager: PQP.Trace.TraceManager =
 			TraceManagerUtils.createTraceManager(
 				document.uri,
 				"onFoldingRanges",
 			);
+
 		const analysis: PQLS.Analysis = createAnalysis(document, traceManager);
 
 		const result: PQP.Result<
@@ -323,11 +326,13 @@ connection.onRenameRequest(
 
 		const pqpCancellationToken: PQP.ICancellationToken =
 			SettingsUtils.createCancellationToken(cancellationToken);
+
 		const traceManager: PQP.Trace.TraceManager =
 			TraceManagerUtils.createTraceManager(
 				document.uri,
 				"onRenameRequest",
 			);
+
 		const analysis: PQLS.Analysis = createAnalysis(document, traceManager);
 
 		const result: PQP.Result<
@@ -369,11 +374,13 @@ connection.onRequest(
 
 		const pqpCancellationToken: PQP.ICancellationToken =
 			SettingsUtils.createCancellationToken(undefined);
+
 		const traceManager: PQP.Trace.TraceManager =
 			TraceManagerUtils.createTraceManager(
 				document.uri,
 				"semanticTokens",
 			);
+
 		const analysis: PQLS.Analysis = createAnalysis(document, traceManager);
 
 		const result: PQP.Result<

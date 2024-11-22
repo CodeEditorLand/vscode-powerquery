@@ -26,6 +26,7 @@ async function processText(
 	processingFunction: (selection: string) => string,
 ): Promise<void> {
 	const selectionSeparator: string = "\n-----------------------------\n";
+
 	const target: string = getSetting("powerquery.editor", "transformTarget");
 
 	try {
@@ -54,7 +55,9 @@ async function processText(
 				);
 
 				await vscode.env.clipboard.writeText(textForClipboard);
+
 				break;
+
 			case "inPlace":
 			default:
 				textEditor.selections.forEach(
@@ -163,6 +166,7 @@ export async function extractDataflowDocument(): Promise<
 
 	const document: vscode.TextDocument =
 		await vscode.workspace.openTextDocument(newFileUri);
+
 	const contentEdit: vscode.WorkspaceEdit = new vscode.WorkspaceEdit();
 	contentEdit.insert(document.uri, new vscode.Position(0, 0), content);
 	await vscode.workspace.applyEdit(contentEdit);
@@ -181,6 +185,7 @@ export async function extractDataflowDocument(): Promise<
 	);
 
 	const formatEdit: vscode.WorkspaceEdit = new vscode.WorkspaceEdit();
+
 	formatEdit.set(document.uri, textEdits as vscode.TextEdit[]);
 
 	await vscode.workspace.applyEdit(formatEdit);

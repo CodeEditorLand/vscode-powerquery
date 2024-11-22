@@ -13,7 +13,9 @@ import { PowerQueryApi } from "./powerQueryApi";
 import * as Subscriptions from "./subscriptions";
 
 let client: LC.LanguageClient;
+
 let librarySymbolClient: LibrarySymbolClient;
+
 let librarySymbolManager: LibrarySymbolManager;
 
 export async function activate(
