@@ -4,12 +4,16 @@
 import type * as PQLS from "@microsoft/powerquery-language-services";
 
 export type LibrarySymbol = PQLS.LibrarySymbol.LibrarySymbol;
+
 export type LibrarySymbolDocumentation =
 	PQLS.LibrarySymbol.LibrarySymbolDocumentation;
+
 export type LibrarySymbolFunctionParameter =
 	PQLS.LibrarySymbol.LibrarySymbolFunctionParameter;
+
 export type LibrarySymbolRecordField =
 	PQLS.LibrarySymbol.LibrarySymbolRecordField;
+
 export type LibraryJson = ReadonlyArray<LibrarySymbol>;
 
 export interface PowerQueryApi {

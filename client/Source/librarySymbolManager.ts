@@ -12,6 +12,7 @@ export type MinimalClientTrace = Pick<
 	LC.BaseLanguageClient,
 	"debug" | "info" | "warn" | "error"
 >;
+
 export type MinimalFileSystem = Pick<
 	vscode.FileSystem,
 	"readDirectory" | "readFile" | "stat"
