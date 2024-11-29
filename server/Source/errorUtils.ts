@@ -10,8 +10,11 @@ import * as LS from "vscode-languageserver/node";
 
 export interface FormatErrorMetadata {
 	readonly child: FormatErrorMetadata | undefined;
+
 	readonly topOfStack: string | undefined;
+
 	readonly message: string | undefined;
+
 	readonly name: string;
 }
 
@@ -30,21 +33,28 @@ export function handleError(
 		value.innerError instanceof PQP.CommonError.CancellationError
 	) {
 		vscodeMessage = `CancellationError during ${action}.`;
+
 		connection.console.info(vscodeMessage);
 	} else if (
 		PQP.CommonError.isCommonError(value) &&
 		value.innerError instanceof PQP.CommonError.InvariantError
 	) {
 		vscodeMessage = `InvariantError during ${action}.`;
+
 		connection.console.warn(vscodeMessage);
+
 		connection.console.warn(formatError(value.innerError));
 	} else if (value instanceof Error) {
 		const error: Error = value;
+
 		vscodeMessage = `Unexpected Error during ${action}.`;
+
 		connection.console.error(vscodeMessage);
+
 		connection.console.error(formatError(error));
 	} else {
 		vscodeMessage = `unknown error value '${value}' during ${action}.`;
+
 		connection.console.warn(vscodeMessage);
 	}
 

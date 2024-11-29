@@ -16,6 +16,7 @@ interface RuntimeEnvironment {
 			callback: (...args: unknown[]) => void,
 			...args: unknown[]
 		) => Disposable;
+
 		readonly setTimeout: (
 			callback: (...args: unknown[]) => void,
 			ms: number,
@@ -95,6 +96,7 @@ export function runSafeAsync<T, E>(
 					(e: Error) => {
 						// TODO: Should we be passing through tracemanager?
 						console.error(formatError(errorMessage, e));
+
 						resolve(errorVal);
 					},
 				);

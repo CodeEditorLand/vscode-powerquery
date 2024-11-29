@@ -66,6 +66,7 @@ async function processText(
 							const replacement: string = processingFunction(
 								textEditor.document.getText(selection),
 							);
+
 							edit.replace(selection, replacement);
 						} catch (err) {
 							await vscode.window.showErrorMessage(
@@ -168,7 +169,9 @@ export async function extractDataflowDocument(): Promise<
 		await vscode.workspace.openTextDocument(newFileUri);
 
 	const contentEdit: vscode.WorkspaceEdit = new vscode.WorkspaceEdit();
+
 	contentEdit.insert(document.uri, new vscode.Position(0, 0), content);
+
 	await vscode.workspace.applyEdit(contentEdit);
 
 	// TODO: Can this be read from user settings/preferences?

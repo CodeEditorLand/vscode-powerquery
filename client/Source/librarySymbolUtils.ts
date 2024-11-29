@@ -11,6 +11,7 @@ import {
 
 export function parseLibraryJson(json: string): LibraryJson {
 	const parsed: unknown = JSON.parse(json);
+
 	assertLibraryJson(parsed);
 
 	return parsed;
@@ -18,16 +19,23 @@ export function parseLibraryJson(json: string): LibraryJson {
 
 function assertLibraryJson(json: unknown): asserts json is LibraryJson {
 	assertIsArray(json);
+
 	json.forEach(assertLibrarySymbol);
 }
 
 function assertLibrarySymbol(symbol: unknown): asserts symbol is LibrarySymbol {
 	assertIsObject(symbol);
+
 	assertHasProperty(symbol, "name", "string");
+
 	assertHasProperty(symbol, "documentation", "object", true);
+
 	assertHasProperty(symbol, "functionParameters", "object", true);
+
 	assertHasProperty(symbol, "completionItemKind", "number");
+
 	assertHasProperty(symbol, "isDataSource", "boolean");
+
 	assertHasProperty(symbol, "type", "string");
 
 	const librarySymbol: LibrarySymbol = symbol as LibrarySymbol;
@@ -44,6 +52,7 @@ function assertLibrarySymbol(symbol: unknown): asserts symbol is LibrarySymbol {
 		librarySymbol.functionParameters !== undefined
 	) {
 		assertIsArray(librarySymbol.functionParameters);
+
 		librarySymbol.functionParameters.forEach(
 			assertLibrarySymbolFunctionParameter,
 		);
@@ -54,7 +63,9 @@ function assertLibrarySymbolDocumentation(
 	doc: unknown,
 ): asserts doc is LibrarySymbolDocumentation {
 	assertIsObject(doc);
+
 	assertHasProperty(doc, "description", "string", true);
+
 	assertHasProperty(doc, "longDescription", "string", true);
 }
 
@@ -62,17 +73,29 @@ function assertLibrarySymbolFunctionParameter(
 	param: unknown,
 ): asserts param is LibrarySymbolFunctionParameter {
 	assertIsObject(param);
+
 	assertHasProperty(param, "name", "string");
+
 	assertHasProperty(param, "type", "string");
+
 	assertHasProperty(param, "isRequired", "boolean");
+
 	assertHasProperty(param, "isNullable", "boolean");
+
 	assertHasProperty(param, "caption", "string", true);
+
 	assertHasProperty(param, "description", "string", true);
+
 	assertHasProperty(param, "sampleValues", "object", true);
+
 	assertHasProperty(param, "allowedValues", "object", true);
+
 	assertHasProperty(param, "defaultValue", "object", true);
+
 	assertHasProperty(param, "fields", "object", true);
+
 	assertHasProperty(param, "enumNames", "object", true);
+
 	assertHasProperty(param, "enumCaptions", "object", true);
 
 	const functionParam: LibrarySymbolFunctionParameter =
@@ -117,10 +140,15 @@ function assertLibrarySymbolRecordField(
 	field: unknown,
 ): asserts field is LibrarySymbolRecordField {
 	assertIsObject(field);
+
 	assertHasProperty(field, "name", "string");
+
 	assertHasProperty(field, "type", "string");
+
 	assertHasProperty(field, "isRequired", "boolean");
+
 	assertHasProperty(field, "caption", "string", true);
+
 	assertHasProperty(field, "description", "string", true);
 }
 

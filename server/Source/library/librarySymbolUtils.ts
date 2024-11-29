@@ -44,13 +44,16 @@ export function toLibraryDefinitions(
 
 	if (PQP.PartialResultUtils.isOk(libraryDefinitionsResult)) {
 		libraryDefinitions = libraryDefinitionsResult.value;
+
 		invalidSymbols = [];
 	} else if (PQP.PartialResultUtils.isIncomplete(libraryDefinitionsResult)) {
 		libraryDefinitions =
 			libraryDefinitionsResult.partial.libraryDefinitions;
+
 		invalidSymbols = libraryDefinitionsResult.partial.invalidSymbols;
 	} else {
 		libraryDefinitions = new Map();
+
 		invalidSymbols = libraryDefinitionsResult.error;
 	}
 

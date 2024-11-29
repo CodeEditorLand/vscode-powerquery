@@ -21,11 +21,13 @@ type LibraryJson = ReadonlyArray<PQLS.LibrarySymbol.LibrarySymbol>;
 
 interface SemanticTokenParams {
 	readonly textDocumentUri: string;
+
 	readonly cancellationToken: LS.CancellationToken;
 }
 
 interface ModuleLibraryUpdatedParams {
 	readonly workspaceUriPath: string;
+
 	readonly library: LibraryJson;
 }
 
@@ -140,6 +142,7 @@ connection.onDefinition(
 
 connection.onDidChangeConfiguration(async () => {
 	await SettingsUtils.initializeServerSettings(connection);
+
 	connection.languages.diagnostics.refresh();
 });
 
@@ -411,7 +414,9 @@ connection.onRequest(
 				params.workspaceUriPath,
 				params.library,
 			);
+
 			LibraryUtils.clearCache();
+
 			connection.languages.diagnostics.refresh();
 		},
 	),
@@ -425,8 +430,11 @@ connection.onRequest(
 			const symbolMaps: ReadonlyMap<string, LibraryJson> = new Map(
 				params.librarySymbols,
 			);
+
 			ExternalLibraryUtils.addLibaries(symbolMaps);
+
 			LibraryUtils.clearCache();
+
 			connection.languages.diagnostics.refresh();
 		},
 	),
@@ -437,7 +445,9 @@ connection.onRequest(
 	EventHandlerUtils.genericRequestHandler(
 		(params: RemoveLibrarySymbolsParams) => {
 			ExternalLibraryUtils.removeLibraries(params.librariesToRemove);
+
 			LibraryUtils.clearCache();
+
 			connection.languages.diagnostics.refresh();
 		},
 	),

@@ -96,6 +96,7 @@ export async function activate(
 	);
 
 	librarySymbolClient = new LibrarySymbolClient(client);
+
 	librarySymbolManager = new LibrarySymbolManager(
 		librarySymbolClient,
 		client,

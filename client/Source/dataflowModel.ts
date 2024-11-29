@@ -6,7 +6,9 @@
 export interface DataflowModel {
 	name: string;
 	"ppdf:dataflowId": string;
+
 	culture: string;
+
 	modifiedTime: Date;
 	"pbi:mashup": Mashup;
 }

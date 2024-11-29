@@ -21,10 +21,13 @@ export type MinimalFileSystem = Pick<
 export class LibrarySymbolManager {
 	private static readonly ErrorMessagePrefix: string =
 		"Error processing symbol directory path. Please update your configuration.";
+
 	private static readonly SymbolFileExtension: string = ".json";
+
 	private static readonly SymbolFileEncoding: string = "utf-8";
 
 	private readonly fs: vscode.FileSystem;
+
 	private readonly registeredSymbolModules: string[] = [];
 
 	constructor(
@@ -107,6 +110,7 @@ export class LibrarySymbolManager {
 		for (const [uri, library] of allSymbolFiles) {
 			const moduleName: string =
 				LibrarySymbolManager.getModuleNameFromFileUri(uri);
+
 			validSymbolLibraries.set(moduleName, library);
 		}
 

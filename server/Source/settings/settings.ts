@@ -6,13 +6,21 @@ import * as PQP from "@microsoft/powerquery-parser";
 
 export interface ServerSettings {
 	checkForDuplicateIdentifiers: boolean;
+
 	checkInvokeExpressions: boolean;
+
 	experimental: boolean;
+
 	isBenchmarksEnabled: boolean;
+
 	isWorkspaceCacheAllowed: boolean;
+
 	locale: string;
+
 	mode: "Power Query" | "SDK";
+
 	symbolTimeoutInMs: number;
+
 	typeStrategy: PQLS.TypeStrategy;
 }
 

@@ -24,12 +24,14 @@ export class CancellationTokenAdapter implements PQP.ICancellationToken {
 			this.parserCancellationToken.cancel(
 				this.cancelReason ?? "Language server cancellation requested",
 			);
+
 			this.parserCancellationToken.throwIfCancelled();
 		}
 	}
 
 	public cancel(reason: string): void {
 		this.cancelReason = reason;
+
 		this.parserCancellationToken.cancel(reason);
 	}
 }
